@@ -1,0 +1,25 @@
+--Create View --
+CREATE VIEW GuestReservationDetails AS
+SELECT g.guest_id, g.name, r.reservation_id, r.check_in, r.check_out, rm.room_type, rm.price
+FROM Guests g
+JOIN Reservations r ON g.guest_id = r.guest_id
+JOIN Rooms rm ON r.room_id = rm.room_id;
+
+-- View of Abstraction --
+SELECT name, room_type, price
+FROM GuestReservationDetails
+WHERE room_type = 'Deluxe';
+
+-- View of security --
+CREATE VIEW StaffPublicInfo AS
+SELECT staff_id, name, role
+FROM Staff;
+
+--view update--
+CREATE OR REPLACE VIEW GuestReservationDetails AS
+SELECT g.guest_id, g.name, r.reservation_id, r.check_in, r.check_out
+FROM Guests g
+JOIN Reservations r ON g.guest_id = r.guest_id;
+
+--View Drop--
+DROP VIEW GuestReservationDetails;
